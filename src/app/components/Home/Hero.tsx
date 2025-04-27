@@ -50,8 +50,8 @@ export default function Home() {
         }, 'a');
 
         tl.to(sunraysRef.current, {
-            y: -250,
-            duration: 0.2,
+            y: -350,
+            duration: 0.3,
         }, 'a');
 
         tl.to(textRef.current, {
