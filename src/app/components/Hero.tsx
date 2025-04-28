@@ -13,6 +13,7 @@ export default function Hero() {
     const screenRef = useRef(null);
     const cursorRef = useRef(null);
     const text2Ref = useRef(null);
+    const imageRef = useRef(null);
 
     useGSAP(() => {
         const tl = gsap.timeline({
@@ -39,21 +40,39 @@ export default function Hero() {
 
     const handleGrow = () => {
         gsap.to(cursorRef.current, {
-            scale: 4,
+            scale: 3.5,
         });
+    }
+
+    const handleGrowImage = () => {
+        gsap.to(cursorRef.current, {
+            scale: 4,
+            mixBlendMode: "normal",
+        })
     }
 
     const handleShrink = () => {
         gsap.to(cursorRef.current, {
             scale: 1,
+        });
+    }
 
+    const handleShrinkImage = () => {
+        gsap.to(cursorRef.current, {
+            scale: 1,
+            mixBlendMode: "difference"
         });
     }
 
     return (
         <>
             <div ref={cursorRef} className="bg-white w-6 rounded-full h-6 fixed mix-blend-difference z-40"></div>
-            <section className='w-full h-screen bg-zinc-900 flex justify-center items-center'>
+            <section className='w-full h-screen bg-zinc-900 flex justify-around items-center'>
+                <div onMouseEnter={handleGrowImage} onMouseLeave={handleShrinkImage} ref={imageRef} className="w-max h-max cursor-pointer flex relative">
+                    <Image alt="image" src={'/1.jpg'} width={400} height={300} />
+                    <div className="absolute h-[533px] w-[400px] z-50">
+                    </div>
+                </div>
                 <div onMouseEnter={handleGrow} onMouseLeave={handleShrink} ref={text2Ref} className="w-max h-max cursor-pointer flex relative">
                     <h1 className="text-5xl font-bold text-white">HOVER ME</h1>
                     <div className="w-64 h-12 absolute z-50">
